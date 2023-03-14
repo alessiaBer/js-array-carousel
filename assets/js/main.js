@@ -38,9 +38,24 @@ for (let i = 0; i < imgArray.length; i++) {
     const imgEl = `<img class="img ${i === activeImg ? 'active' : ''}" src="${images}">`;
     
     //inserisco l'elemento HTML per l'img nel .carousel presente nell'html
-    carouselEl.insertAdjacentHTML('beforeend', imgEl);
+    carouselEl.insertAdjacentHTML('afterbegin', imgEl);
 
     
+}
+
+const sideImgContainer = document.querySelector('.side-container')
+
+for (let i = 0; i < imgArray.length; i++) {
+    let activeImg = 0;
+    //assegno ad una variabile ogni immagine dell'array usando l'index 
+    const images = imgArray[i];
+
+    //creo l'elemento HTML per l'img e lo assegno ad una variabile, l'elemento avrà una classe dinamica e il src in base all'index dell'array
+    const sideEl = `<img class="img ${i === activeImg ? 'active' : ''}" src="${images}">`;
+    
+    //inserisco l'elemento HTML per l'img nel .carousel presente nell'html
+    sideImgContainer.insertAdjacentHTML('beforeend', sideEl);
+
 }
 
 /**** MILESTONE 3
@@ -50,6 +65,8 @@ che quindi verrà visualizzata al posto della precedente.*/
 
 //seleziono tutte le immagini create nel DOM e le assegno ad una variabile
 const allImgEl = document.querySelectorAll('.carousel > .img');
+
+const allSideImg = document.querySelectorAll('.side-container > .img');
 //seleziono dal DOM il btn .next
 const nextBtn = document.querySelector('.next');
 //seleziono dal DOM il btn .prev
@@ -61,11 +78,15 @@ nextBtn.addEventListener('click', function() {
     //seleziono l'indice dell'img attiva e la assegno ad una variabile
     const currentImg = allImgEl[activeImg];
     console.log(currentImg)
+
+    const currentSideImg = allSideImg[activeImg]
     //rimuovo dall'img corrente la class active
     currentImg.classList.remove('active');
+    currentSideImg.classList.remove('active');
     //incremento il valore dell'index dell'activeImg
     activeImg++;
     
+    /**BONUS 1 */
     //aggiungo un if statement per fermare l'incremento quando si arriva all'ultima img e far ripartire da capo
     if (activeImg > 4) {
         activeImg = 0;
@@ -73,9 +94,11 @@ nextBtn.addEventListener('click', function() {
 
     //seleziono l'img successiva e la assegno ad una variabile
     const nextImg = allImgEl[activeImg];
+    const nextSideImg = allSideImg[activeImg];
+
     //aggiungo all'immagine successiva la classe active
     nextImg.classList.add('active');
-
+    nextSideImg.classList.add('active')
     
 
 })
@@ -85,20 +108,27 @@ prevBtn.addEventListener('click', function() {
     //seleziono l'indice dell'img attiva e la assegno ad una variabile
     const currentImg = allImgEl[activeImg];
     console.log(currentImg)
+    const currentSideImg = allSideImg[activeImg];
     //rimuovo dall'img corrente la class active
     currentImg.classList.remove('active');
+    currentSideImg.classList.remove('active');
+
     //decremento il valore dell'index dell'activeImg
     activeImg--;
 
+    /**BONUS 1 */
     //aggiungo un if statement per fermare il decremento quando si arriva alla prima immagine e ricominciare dall'ultima
     if (activeImg < 0) {
         activeImg = 4;
     }
+    /*** */
 
     //seleziono l'img precedente e la assegno ad una variabile
     const prevImg = allImgEl[activeImg];
+    const prevSideImg = allSideImg[activeImg];
     //aggiungo all'immagine successiva la classe active
     prevImg.classList.add('active');
+    prevSideImg.classList.add('active');
 })
 
 /* BONUS 1:

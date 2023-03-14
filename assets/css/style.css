@@ -12,13 +12,15 @@
 }
 
 .carousel {
-    position: relative;
+    display: flex;
     height: 500px;
+    width: 100%;
 }
 
 img {
     height: 100%;
     width: auto;
+    max-width: 90%;
 }
 
 img:not(.active) {
@@ -44,4 +46,18 @@ button.next {
     bottom: 30px;
     right: 50%;
     transform: translate(50%, 50%);
+}
+
+.side-container {
+    position: absolute;
+    width: 10%;
+    margin-left: auto;
+}
+
+.side-container > img {
+    display: block;
+}
+
+.side-container > img.active {
+    border: 2px solid white;
 }
