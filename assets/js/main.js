@@ -34,7 +34,7 @@ for (let i = 0; i < imgArray.length; i++) {
     //creo l'elemento HTML per l'img e lo assegno ad una variabile, l'elemento avrà una classe dinamica e il src in base all'index dell'array
     const imgEl = `<img class="img ${i === activeImg ? 'active' : ''}" src="${images}">`;
     //inserisco l'elemento HTML per l'img nel .carousel presente nell'html
-    carouselEl.insertAdjacentHTML('beforeend', imgEl);
+    carouselEl.insertAdjacentHTML('afterbegin', imgEl);
 }
 
 /**** MILESTONE 3
