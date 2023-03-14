@@ -30,12 +30,17 @@ let activeImg = 0;
 
 // creo un loop che passi ogni immagine dell'array 
 for (let i = 0; i < imgArray.length; i++) {
+
     //assegno ad una variabile ogni immagine dell'array usando l'index 
     const images = imgArray[i];
+
     //creo l'elemento HTML per l'img e lo assegno ad una variabile, l'elemento avrà una classe dinamica e il src in base all'index dell'array
     const imgEl = `<img class="img ${i === activeImg ? 'active' : ''}" src="${images}">`;
+    
     //inserisco l'elemento HTML per l'img nel .carousel presente nell'html
     carouselEl.insertAdjacentHTML('beforeend', imgEl);
+
+    
 }
 
 /**** MILESTONE 3
@@ -60,10 +65,19 @@ nextBtn.addEventListener('click', function() {
     currentImg.classList.remove('active');
     //incremento il valore dell'index dell'activeImg
     activeImg++;
+    
+    //aggiungo un if statement per fermare l'incremento quando si arriva all'ultima img e far ripartire da capo
+    if (activeImg > 4) {
+        activeImg = 0;
+    }
+
     //seleziono l'img successiva e la assegno ad una variabile
     const nextImg = allImgEl[activeImg];
     //aggiungo all'immagine successiva la classe active
     nextImg.classList.add('active');
+
+    
+
 })
 
 //assegno al btn .prev un eventListener per il click
@@ -75,9 +89,26 @@ prevBtn.addEventListener('click', function() {
     currentImg.classList.remove('active');
     //decremento il valore dell'index dell'activeImg
     activeImg--;
+
+    //aggiungo un if statement per fermare il decremento quando si arriva alla prima immagine e ricominciare dall'ultima
+    if (activeImg < 0) {
+        activeImg = 4;
+    }
+
     //seleziono l'img precedente e la assegno ad una variabile
     const prevImg = allImgEl[activeImg];
     //aggiungo all'immagine successiva la classe active
     prevImg.classList.add('active');
 })
 
+/* BONUS 1:
+Aggiungere il ciclo infinito del carosello. 
+Ovvero se è attiva la prima immagine e l'utente clicca la freccia per andare all’immagine precedente, 
+dovrà comparire l’ultima immagine dell’array e viceversa */
+
+
+
+/* BONUS 2:
+Aggiungere la visualizzazione di tutte le thumbnails sulla destra dell’immagine grande attiva, come nello screenshot proposto. 
+Tutte le miniature avranno un layer di opacità scura, tranne quella corrispondente all’immagine attiva, che invece avrà un bordo colorato.
+Al click delle frecce, oltre al cambio di immagine attiva, gestire il cambio di miniatura attiva */
